@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "DanaFaNum";
+  src: url("/fonts/dana-fanum\ regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DanaFaNum";
+  src: url("/fonts/ae238c3ee498c52a23aab0d9f5e94d6b.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
