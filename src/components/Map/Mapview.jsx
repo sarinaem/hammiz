@@ -5,15 +5,18 @@ import { useEffect, useRef, useState } from "react";
 
 import admin from "../../assets/admin.svg";
 import search from "../../assets/Search.svg";
-import { getLocations } from "@/api/Location";
-import useGetLocation from "@/services/location/query/useGetLocation";
+// import { getLocations } from "@/api/Location";
+
+import { useNavigate } from "react-router-dom";
+import { getLocations } from "@/api/api";
+
+// import useGetLocation from "@/services/location/query/useGetLocation";
 
 // import convertPersian from "../../convertPersian/convertPersian";
 
 // const STATIC_LOCATIONS = [
 //   { id: 1, name: "انقلاب", latitude: 35.701065, longitude: 51.391214 },
 // ];
-
 
 const StaticMap = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,17 +27,18 @@ const StaticMap = () => {
   const [activeId, setActiveId] = useState();
   const [locations, setLocations] = useState([]);
 
+  const navigate = useNavigate();
   const ref = useRef();
 
-  // useEffect(() => {
-  //   const fetchLocations = async () => {
-  //     const data = await getLocations();
-  //     console.log(data);
+  useEffect(() => {
+    const fetchLocations = async () => {
+      const data = await getLocations();
+      console.log(data);
 
-  //     setLocations(data);
-  //   };
-  //   fetchLocations();
-  // }, []);
+      setLocations(data);
+    };
+    fetchLocations();
+  }, []);
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -91,10 +95,8 @@ const StaticMap = () => {
     setActiveLocation(loc);
   };
 
-
-
-  const {data} = useGetLocation()
-  console.log(data)
+  // const { data } = useGetLocation();
+  // console.log(data);
 
   return (
     <div style={{ height: "100vh" }} className="relative">
@@ -116,13 +118,13 @@ const StaticMap = () => {
               value={searchTerm}
               type="text"
               ref={ref}
-              placeholder="هممیز خودت رو انتخاب کن"
+              placeholder="همممیز خودت رو انتخاب کن"
               onChange={handleSearch}
               className="text-[#525252] leading-[23px] text-base font-dana font-normal text-right bg-transparent border-none outline-none
              placeholder:text-[#525252] w-full"
             />
           </div>
-          <div className="bg-[#F87A08] rounded-full  object-contain flex justify-center items-center w-[40px] h-[40px] cursor-pointer">
+          <div className="bg-[#F87A08] rounded-full object-contain flex justify-center items-center w-[40px] h-[40px] cursor-pointer">
             <img src={search} alt="search" className="w-[18px] h-[18px]" />
           </div>
         </div>
@@ -160,7 +162,7 @@ const StaticMap = () => {
         attributionControl={false}
         zoomControl={false}
         scrollWheelZoom={true}
-        zoom={25}
+        zoom={20}
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
@@ -184,16 +186,19 @@ const StaticMap = () => {
         ))}
         {activeLocation && <ZoomToLocation location={activeLocation} />}
       </MapContainer>
-      {/* <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-[90%] flex justify-center">
+      <div
+        className=" bottom-10 h-[50px] absolute left-1/2 transform -translate-x-1/2 w-[90%] flex justify-center"
+        style={{ zIndex: 1000 }}
+      >
         <button
           onClick={() => navigate("/product")}
-          className={`px-6 py-2 rounded-lg z-[100] ${
-            activeId ? "bg-orange-500" : "bg-gray-300"
+          className={`px-6 py-2 rounded-[50px] w-[90%] font-bold font-dana text-lg leading-[26px] ${
+            activeId ? "bg-orange-500" : "bg-[#999999]"
           } text-white`}
         >
           برگزیدن
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };
