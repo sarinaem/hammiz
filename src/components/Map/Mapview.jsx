@@ -155,7 +155,6 @@ export default function MapView() {
 
         <ZoomToLocation location={selectedLocation} />
       </MapContainer>
-      {/* دکمه پایین */}
       <div
         style={{
           position: "absolute",

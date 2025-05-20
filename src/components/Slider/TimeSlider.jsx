@@ -1,9 +1,7 @@
-// ✅ TimeSlider.jsx – بازنویسی‌شده برای دریافت مقدار از بیرون و قابل استفاده در TimeBtn
-import React from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-export const hours = Array.from({ length: 16 }, (_, i) => i + 8);
+export const hours = Array.from({ length: 16 }, (_, i) => i + 10);
 
 const TimeSlider = ({ value, onChange }) => {
   return (
