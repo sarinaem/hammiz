@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import admin from "../../assets/admin.svg";
 import search from "../../assets/Search.svg";
 import { getLocations } from "@/api/Location";
+import useGetLocation from "@/services/location/query/useGetLocation";
 
 // import convertPersian from "../../convertPersian/convertPersian";
 
@@ -13,7 +14,6 @@ import { getLocations } from "@/api/Location";
 //   { id: 1, name: "انقلاب", latitude: 35.701065, longitude: 51.391214 },
 // ];
 
-console.log(getLocations());
 
 const StaticMap = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,15 +26,15 @@ const StaticMap = () => {
 
   const ref = useRef();
 
-  useEffect(() => {
-    const fetchLocations = async () => {
-      const data = await getLocations();
-      console.log(data);
+  // useEffect(() => {
+  //   const fetchLocations = async () => {
+  //     const data = await getLocations();
+  //     console.log(data);
 
-      setLocations(data);
-    };
-    fetchLocations();
-  }, []);
+  //     setLocations(data);
+  //   };
+  //   fetchLocations();
+  // }, []);
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -90,6 +90,11 @@ const StaticMap = () => {
     setActiveId((prevId) => (prevId === id ? null : id));
     setActiveLocation(loc);
   };
+
+
+
+  const {data} = useGetLocation()
+  console.log(data)
 
   return (
     <div style={{ height: "100vh" }} className="relative">
