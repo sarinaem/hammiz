@@ -93,7 +93,7 @@ const StaticMap = () => {
   // console.log(data);
 
   return (
-    <div style={{ height: "100vh" }} className="relative">
+    <div style={{ height: "100vh" }} className="relative mx-auto">
       {/* Search Input */}
       <div
         className="absolute font-normal leading-6 text-base top-[10px] flex flex-row-reverse gap-6 p-1 rounded-[40px] justify-between items-center bg-white"
@@ -126,7 +126,7 @@ const StaticMap = () => {
 
       {/* Search Results */}
       {showResults && (
-        <ul className="absolute top-[49px] outline-none border-none right-[40px] w-[86%] rounded-lg bg-white border mt-1 shadow z-[1000]">
+        <ul className="absolute top-[54px] outline-none border-none right-[40px] w-[86%] rounded-lg rounded-t-none bg-white border mt-1 z-[1000]">
           {filteredLocations.length ? (
             filteredLocations.map((loc) => (
               <li
@@ -134,7 +134,7 @@ const StaticMap = () => {
                 onClick={() => {
                   handleSelectLocation(loc);
                 }}
-                className="p-2 cursor-pointer hover:bg-gray-200 "
+                className="p-2 cursor-pointer rounded-md mt-[6px] hover:bg-gray-200 "
               >
                 {loc.name}
               </li>
