@@ -10,13 +10,7 @@ import search from "../../assets/Search.svg";
 import { useNavigate } from "react-router-dom";
 import { getLocations } from "@/api/api";
 
-// import useGetLocation from "@/services/location/query/useGetLocation";
-
-// import convertPersian from "../../convertPersian/convertPersian";
-
-// const STATIC_LOCATIONS = [
-//   { id: 1, name: "انقلاب", latitude: 35.701065, longitude: 51.391214 },
-// ];
+import LocateButton from "../LocationUser/LocationUser";
 
 const StaticMap = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -80,7 +74,7 @@ const StaticMap = () => {
   const getIcon = (id) => {
     const isActive = activeId === id;
     return new L.Icon({
-      iconUrl: isActive ? "/activeLocation.svg" : "/noActiveLocation.svg",
+      iconUrl: isActive ? "/active.svg" : "/disable.svg",
       iconSize: [40, 40],
       iconAnchor: [20, 40],
     });
@@ -185,7 +179,9 @@ const StaticMap = () => {
           </Marker>
         ))}
         {activeLocation && <ZoomToLocation location={activeLocation} />}
+        <LocateButton />
       </MapContainer>
+
       <div
         className=" bottom-10 h-[50px] absolute left-1/2 transform -translate-x-1/2 w-[90%] flex justify-center"
         style={{ zIndex: 1000 }}
