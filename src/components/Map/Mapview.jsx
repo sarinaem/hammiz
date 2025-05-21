@@ -126,7 +126,7 @@ const StaticMap = () => {
 
       {/* Search Results */}
       {showResults && (
-        <ul className="absolute top-[50px] right-[40px] w-[80%] bg-white border mt-1 rounded shadow z-[1000]">
+        <ul className="absolute top-[49px] outline-none border-none right-[40px] w-[86%] rounded-lg bg-white border mt-1 shadow z-[1000]">
           {filteredLocations.length ? (
             filteredLocations.map((loc) => (
               <li
@@ -134,7 +134,7 @@ const StaticMap = () => {
                 onClick={() => {
                   handleSelectLocation(loc);
                 }}
-                className="p-2 cursor-pointer hover:bg-gray-200"
+                className="p-2 cursor-pointer hover:bg-gray-200 "
               >
                 {loc.name}
               </li>
@@ -188,7 +188,8 @@ const StaticMap = () => {
       >
         <button
           onClick={() => navigate("/product")}
-          className={`px-6 py-2 rounded-[50px] w-[90%] font-bold font-dana text-lg leading-[26px] ${
+          disabled={!activeId}
+          className={`px-6 py-2 rounded-[50px] w-[95%] font-bold font-dana text-lg leading-[26px] ${
             activeId ? "bg-orange-500" : "bg-[#999999]"
           } text-white`}
         >

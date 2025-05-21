@@ -6,15 +6,16 @@ export default function LocateButton() {
 
   const handleLocate = () => {
     if (!navigator.geolocation) {
-      alert("لوکیشن غیر فعال است.");
+      alert("لطفا لوکیشن خودتون رو انتخاب کنید.");
       return;
     }
+    console.log("start locating...");
 
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         const { latitude, longitude } = coords;
 
-        map.flyTo.setView([latitude, longitude], 20, { animate: true });
+        map.setView([latitude, longitude], 20, { animate: true });
 
         const myIcon = L.icon({
           iconUrl: "/mylocation.svg",
@@ -38,7 +39,7 @@ export default function LocateButton() {
       <button onClick={handleLocate} className="p-2 rounded-full">
         <img
           src="/userLocation.svg"
-          className="w-[35px] h-[35px] mb-[60px] ml-6"
+          className="w-[35px] h-[35px] mb-[40px] ml-6"
           alt=""
         />
       </button>

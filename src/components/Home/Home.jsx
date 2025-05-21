@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="bg-[#f87A08] flex flex-col justify-between py-8 items-center">
-      <div className="flex flex-col justify-center items-center mt-[182px]">
+      <div className="flex flex-col justify-center items-center mt-[150px]">
         <img src={logo} alt="logo website" className="w-[200px] h-[200px]" />
 
         <img src={nameSite} alt="name of site" className="!mt-[39px]" />
