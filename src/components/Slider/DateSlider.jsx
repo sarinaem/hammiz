@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { toJalaali } from "jalaali-js";
@@ -49,7 +49,7 @@ export const getJalaliDays = () => {
 
 const DateLabels = ({ selectedIndex, days }) => {
   return (
-    <div className="flex flex-col justify-center items-center h-[268px]  text-xs font-dana font-bold leading-[18px]">
+    <div className="flex flex-col justify-center items-center h-[268px] mr-3 text-xs font-dana font-bold leading-[18px]">
       {days.map((date, i) => {
         const distance = Math.abs(i - selectedIndex);
         const isVisible = distance <= 1 || i === 0 || i === days.length - 1;
@@ -73,9 +73,9 @@ const DateLabels = ({ selectedIndex, days }) => {
   );
 };
 
-export default function DateSlider() {
-  const { days, todayIndex } = getJalaliDays();
-  const [selectedDate, setSelectedDate] = useState(todayIndex);
+export default function DateSlider({ value, onChange }) {
+  const { days } = getJalaliDays();
+  // const [selectedDate, setSelectedDate] = useState(todayIndex);
 
   return (
     <div className="flex items-center justify-between">
@@ -84,8 +84,9 @@ export default function DateSlider() {
           vertical
           min={0}
           max={days.length - 1}
-          value={selectedDate}
-          onChange={(val) => setSelectedDate(val)}
+          value={value}
+          onChange={onChange}
+          // onChange={(val) => setSelectedDate(val)}
           // handle={(props) => <CustomHandle {...props} days={days} />}
           step={1}
           trackStyle={[
@@ -114,8 +115,6 @@ export default function DateSlider() {
                 "linear-gradient(159.66deg, #B0A6A5 -6.86%, #FFFBF8 111.54%)",
               boxShadow:
                 "1px 1px 1px 0px #0000001A inset, -1px -1px 1px 0px #FFFFFF",
-              // background:
-              //   "linear-gradient(to bottom, white, rgba(200, 200, 200, 0.9), #B8B8B8)",
               borderRadius: "50%",
               left: "-4px",
               transform: "none",
@@ -123,7 +122,7 @@ export default function DateSlider() {
           ]}
         />
       </div>
-      <DateLabels selectedIndex={selectedDate} days={days} />
+      <DateLabels selectedIndex={value} days={days} />
     </div>
   );
 }

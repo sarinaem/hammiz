@@ -18,7 +18,6 @@ const CustomHandle = ({ value, days, style, ...rest }) => {
         justifyContent: "center",
       }}
     >
-      {/* Span کناری با ۳ دیو */}
       <span className="absolute right-[40px] flex flex-col items-end text-right text-xs font-dana leading-[18px] font-bold text-[#525252]">
         <div className="opacity-40 ">{value > 0 ? days[value - 1] : null}</div>
         <div>{value}</div>
