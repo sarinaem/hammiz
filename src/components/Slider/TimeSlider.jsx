@@ -1,11 +1,38 @@
+import React, { useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 export const hours = Array.from({ length: 16 }, (_, i) => i + 10);
 
+const HourLabels = ({ selectedIndex }) => {
+  return (
+    <div className="flex flex-col justify-center items-center h-[260px] pr-2 text-sm text-right font-vazir leading-5">
+      {hours.map((h, i) => {
+        const isActive = i === selectedIndex;
+        const isAdjacent = Math.abs(i - selectedIndex) === 1;
+
+        return (
+          <div
+            key={i}
+            className={`transition-all duration-300 h-[11px]  ${
+              isActive
+                ? "text-[#525252] font-bold text-xs leading-[18px]"
+                : isAdjacent
+                ? "text-gray-400 text-xs opacity-[40%] leading-[18px]"
+                : "invisible"
+            }`}
+          >
+            {h.toLocaleString("fa-IR")}:۰۰
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 const TimeSlider = ({ value, onChange }) => {
   return (
-    <div className="h-[200px] my-5 mx-10">
+    <div className="h-[260px]">
       <Slider
         vertical
         range
@@ -13,53 +40,42 @@ const TimeSlider = ({ value, onChange }) => {
         onChange={onChange}
         min={0}
         max={hours.length - 1}
-        marks={hours.reduce((acc, h, i) => {
-          if (i % 2 === 0) acc[i] = `${h}:00`;
-          return acc;
-        }, {})}
         step={1}
-        trackStyle={{
-          backgroundColor: "#F87A08",
-          width: "15px",
-          left: 13,
-        }}
+        trackStyle={[
+          {
+            backgroundColor: "#F87A08",
+            width: 14,
+            left: "50%",
+            transform: "translateX(-50%)",
+          },
+        ]}
         railStyle={{
-          backgroundColor: "#ccc",
-          opacity: "20%",
-          width: "15px",
-          height: "250px",
-          left: 13,
+          backgroundColor: "#fff",
+          width: 14,
+          left: "50%",
+          transform: "translateX(-50%)",
           border: "0.3px solid #000",
-          boxShadow: "-4px 4px 4px 3px #00000040 inset",
+          boxShadow: "-4px 4px 3px #00000040 inset",
         }}
         handleStyle={[
           {
             height: 30,
             width: 30,
-            boxShadow: "none",
-            outline: "none",
             border: "3px solid #F87A08",
-            background: "linear-gradient(180deg, #FFFBF8 100%, #B0A6A5 0%)",
+            background:
+              "linear-gradient(to bottom, white, rgba(200, 200, 200, 0.9), #B8B8B8)",
             borderRadius: "9999px",
-            color: "white",
-            position: "absolute",
-            right: "-20px",
-            fontSize: 10,
-            textAlign: "center",
+            left: "11px",
+            transform: "translateX(-50%)",
           },
           {
             height: 30,
             width: 30,
-            boxShadow: "none",
-            outline: "none",
             border: "3px solid #F87A08",
             background: "linear-gradient(180deg, #FFFBF8 100%, #B0A6A5 0%)",
             borderRadius: "9999px",
-            color: "white",
-            position: "absolute",
-            right: "-20px",
-            fontSize: 10,
-            textAlign: "center",
+            left: "80%",
+            transform: "translateX(-50%)",
           },
         ]}
       />
@@ -67,4 +83,22 @@ const TimeSlider = ({ value, onChange }) => {
   );
 };
 
-export default TimeSlider;
+export default function TimeSelector() {
+  const [selectedTime, setSelectedTime] = useState([4, 8]); // ساعت 12 تا 16
+  const handleTimeChange = (val) => {
+    const sorted = [...val].sort((a, b) => a - b);
+    setSelectedTime(sorted);
+  };
+  return (
+    <div className="flex flex-col items-center mt-8">
+      <div className="flex items-center rounded-2xl px-6 py-6">
+        {/* ساعت پایانی */}
+        <div className="flex items-center">
+          <HourLabels selectedIndex={selectedTime[1]} />
+          <TimeSlider value={selectedTime} onChange={handleTimeChange} />
+          <HourLabels selectedIndex={selectedTime[0]} />
+        </div>
+      </div>
+    </div>
+  );
+}
